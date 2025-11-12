@@ -1,0 +1,49 @@
+{
+  "name": "kawakeb-lab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.3.3",
+    "@heroicons/react": "^2.1.4",
+    "@react-three/drei": "^9.108.3",
+    "@react-three/fiber": "^8.16.8",
+    "autoprefixer": "^10.4.19",
+    "framer-motion": "^11.2.13",
+    "i": "^0.3.7",
+    "npm": "^10.8.1",
+    "pathseg": "^1.2.1",
+    "postcss": "^8.4.39",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "react-intersection-observer": "^9.10.3",
+    "react-particles": "2.7.1",
+    "react-responsive": "^10.0.0",
+    "react-router-dom": "^6.24.1",
+    "react-tilt": "^1.0.2",
+    "react-toastify": "^10.0.5",
+    "swiper": "^11.1.10",
+    "tailwindcss": "^3.4.4",
+    "tsparticles": "2.7.1",
+    "tsparticles-plugin-polygon-mask": "2.7.1",
+    "tsparticles-slim": "^2.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "vite": "^5.3.1"
+  }
+}
