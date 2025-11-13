@@ -9,23 +9,23 @@ const Hero = () => {
   const title = "WELCOME TO";
   const companyName = "KAWAKEB";
   const tagline =
-    "Where we push the limits of possibility in the digital realm, aiming for the stars, pushing boundaries of innovation, reaching new heights of excellence, and shaping the future.";
+    "Kawakeb creates smart, interactive products using AI, AR, and VR. We design games, simulations, and training tools that educate, entertain, and inspire.";
   const imageUrl = "/mainIconsdark.svg";
   const animationDuration = 0.8;
 
   return (
-    <section className="relative h-full w-full mx-auto flex flex-col items-center justify-center ms:pt-20 pt-8 overflow-hidden">
+    <section id="hero"  style={{ height: "100vh" }} className="relative h-full w-full mx-auto flex flex-col items-center justify-center pt-8 sm:pt-0 overflow-hidden">
       <motion.div
         initial="hidden"
         animate="visible"
-        className="flex flex-row items-center justify-center mt-6 w-full z-10"
+        className="flex flex-row items-center justify-center w-full z-10"
       >
-        <div className="h-full w-full flex flex-col gap-6 justify-center m-auto text-start">
-          <Statusbtn />
+        <div className="h-full w-full flex flex-col gap-6 justify-top m-auto text-start sm:mt-20">
+          {/* <Statusbtn /> */}
 
           <motion.div
             variants={slideInFromLeft(0.5)}
-            className="Microgram flex flex-col gap-6 mt-6 text-4xl sm:text-5xl font-bold text-white max-w-[600px]"
+            className="Microgram flex flex-col gap-6 mt-16 text-4xl sm:text-5xl font-bold text-white max-w-[600px]"
           >
             <span>
               {title}
@@ -58,12 +58,12 @@ const Hero = () => {
         </div>
 
         <div
-          className="min-w-[650] min-h-[650] w-full h-full flex justify-center items-center hidden sm:flex"
+          className="min-w-[650] min-h-[650] w-full h-full flex justify-center items-top hidden sm:flex "
         >
           <img
             src={imageUrl}
             alt="work icons"
-         
+         className="z-50"
           />
         </div>
       </motion.div>

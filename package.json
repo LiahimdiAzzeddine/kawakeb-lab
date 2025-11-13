@@ -16,6 +16,7 @@
     "@react-three/fiber": "^8.16.8",
     "autoprefixer": "^10.4.19",
     "framer-motion": "^11.2.13",
+    "gsap": "^3.13.0",
     "i": "^0.3.7",
     "npm": "^10.8.1",
     "pathseg": "^1.2.1",

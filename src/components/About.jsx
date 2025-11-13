@@ -7,7 +7,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 
 const About = () => {
   return (
-    <>
+    <div  id="section-about">
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>Overview.</h2>
@@ -22,7 +22,7 @@ const About = () => {
         gravitational pull of innovation and fueled by stardust dreams, we
         endeavor to illuminate the digital cosmos with our stellar solutions.
       </motion.p>
-    </>
+    </div>
   );
 };
 
