@@ -32,6 +32,8 @@ function App() {
           <section style={{ height: "100vh" }}>Section 2 — planète gauche</section>
           <section style={{ height: "100vh" }}>Section 3 — planète droite</section>
           <section style={{ height: "100vh" }}>Section 4 — Jupiter</section>
+          <section style={{ height: "100vh" }}>Section 5 — planète droite</section>
+          <section style={{ height: "100vh" }}>Section 6 — Jupiter</section>
         </div>
 
         <Footer />
