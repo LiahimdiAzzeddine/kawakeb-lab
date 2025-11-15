@@ -14,7 +14,7 @@ const Hero = () => {
   const animationDuration = 0.8;
 
   return (
-    <section id="hero"  style={{ height: "100vh" }} className="relative h-full w-full mx-auto flex flex-col items-center justify-center pt-8 sm:pt-0 overflow-hidden">
+    <section id="hero"  style={{ height: "100vh" }} className="relative h-full w-full mx-auto flex flex-col items-center justify-center pt-8 sm:pt-0 overflow-hidden  z-50">
       <motion.div
         initial="hidden"
         animate="visible"

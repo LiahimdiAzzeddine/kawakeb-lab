@@ -19,7 +19,7 @@ function App() {
   return (
     <BrowserRouter>
 
-      <div className="relative z-0">
+      <div className="">
         {/* Canvas plein écran en fond */}
         <BackgroundCanvas />
 
@@ -28,12 +28,13 @@ function App() {
           <Video />
           <Hero />
           <About />
+         
 
-          <section style={{ height: "100vh" }}>Section 2 — planète gauche</section>
-          <section style={{ height: "100vh" }}>Section 3 — planète droite</section>
-          <section style={{ height: "100vh" }}>Section 4 — Jupiter</section>
-          <section style={{ height: "100vh" }}>Section 5 — planète droite</section>
-          <section style={{ height: "100vh" }}>Section 6 — Jupiter</section>
+          <section style={{ height: "100vh" }} >Section 2 </section>
+          <section style={{ height: "100vh" }}>Section 3 </section>
+          <section id="section-4"  style={{ height: "100vh" }}>Section 4 </section>
+          <section style={{ height: "100vh" }}>Section 5 </section>
+          <section style={{ height: "100vh" }}>Section 6</section>
         </div>
 
         <Footer />

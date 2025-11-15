@@ -7,7 +7,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 
 const About = () => {
   return (
-    <div  id="section-about">
+    <div  id="section-about" className="relative z-50">
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>Overview.</h2>
@@ -15,7 +15,7 @@ const About = () => {
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className="Microgram mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px]"
+        className="Microgram mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px] relative z-50"
       >
         Embark on a cosmic journey with KAWAKEB, where we orbit around the
         boundless universe of technology and creativity. Guided by the
@@ -26,4 +26,4 @@ const About = () => {
   );
 };
 
-export default SectionWrapper(About, "about");
+export default SectionWrapper(About, "about",'z-50');

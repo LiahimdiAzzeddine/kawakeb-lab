@@ -8,8 +8,8 @@ import * as THREE from "three";
 import AtmosphereMesh from "../AtmosphereMesh";
 import EarthMaterial from "../EarthMaterial";
 import { Spaceship } from "../Spaceship";
-import { Model } from "../WireframeEdges";
 import { Astronaut } from "../Astronaut";
+import { Electroswing } from "../Electroswing";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,7 +87,7 @@ function Earth({ refEarth }) {
 
 
 
-function CameraScrollAnimation({ earthRef,shipRefo }) {
+function CameraScrollAnimation({ earthRef,shipRefo,setWireframe }) {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -98,7 +98,6 @@ function CameraScrollAnimation({ earthRef,shipRefo }) {
         end: "bottom bottom",
         scrub: 2,
         pin: false,
-        markers:true
       },
     });
 
@@ -117,61 +116,125 @@ function CameraScrollAnimation({ earthRef,shipRefo }) {
  tl.to(shipRefo.current.position, { x:0, duration:1, ease: "power1.inOut" },'<');
   tl.to(shipRefo.current.rotation, {y:Math.PI/2, duration: 2, ease: "power1.inOut" });
 
+
+   ScrollTrigger.create({
+    trigger: "#section-4",
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => setWireframe(true),
+    onLeaveBack: () => setWireframe(false),
+    // onLeave: () => setWireframe(false),
+    // onEnterBack: () => setWireframe(true),
+    markers: true
+  });
+
     return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
   }, [camera]);
 
   return null;
 }
-function ScissorEffect({ shipRefo }) {
-  const { gl, size } = useThree();
-  
-  useEffect(() => {
-    const triggerSection = document.querySelector("#scroll-sections section:last-child");
 
-    const updateScissor = () => {
-      const rect = triggerSection.getBoundingClientRect();
-      gl.setScissor(
-        0,
-        rect.top,
-        size.width,
-        rect.height
-      );
-      gl.setScissorTest(true);
-      gl.setViewport(0, 0, size.width, size.height);
-    };
+ function PlanetWithRings({
+  planetTexture,
+  ringTexture,
+  size = 2,
+  ringInner = 2.5,
+  ringOuter = 4,
+  position = [0, 0, 0],
+  rotationSpeed = 0.0005,
+  groupRef,
+}) {
+  const planetRef = useRef();
+  const ringRef = useRef();
+  const axialTilt = (30.4 * Math.PI) / 180;
 
-    const onScroll = () => {
-      updateScissor();
-    };
+  const planetMap = useLoader(THREE.TextureLoader, planetTexture);
+  const ringMap = useLoader(THREE.TextureLoader, ringTexture);
 
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [gl, size, shipRefo]);
+  useFrame(() => {
+    planetRef.current.rotation.y += rotationSpeed;
+    ringRef.current.rotation.z += rotationSpeed * 0.2;
+  });
 
-  return null;
+  return (
+    <group ref={groupRef} rotation-x={axialTilt} position={position}>
+      <mesh ref={planetRef}>
+        <sphereGeometry args={[size, 64, 64]} />
+        <meshStandardMaterial map={planetMap} />
+      </mesh>
+      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[ringInner, ringOuter, 128]} />
+        <meshBasicMaterial
+          map={ringMap}
+          side={THREE.DoubleSide}
+          transparent
+          opacity={0.8}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
+  const ref = planetRef || useRef();
+  const map = useLoader(THREE.TextureLoader, texturePath);
+  useFrame(() => {
+    ref.current.rotation.y += rotationSpeed;
+  });
+
+  return (
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[size, 64, 64]} />
+      <meshStandardMaterial map={map} />
+    </mesh>
+  );
 }
 
 export default function BackgroundCanvas() {
   const { x, y, z } = sunDirection;
   const EarthRef = useRef();
   const shipRefo=useRef();
+   const NeptuneRef = useRef();
+  const JupiterRef=useRef();
+  const [wireframe,setWireframe]=useState(false)
 
   return (
-    <div className="fixed inset-0 w-screen h-screen z-50">
+    <div className="fixed inset-0 w-screen h-screen z-10">
       <Canvas camera={{ position: [0, 0.1, 5], fov: 50 }} gl={{ toneMapping: THREE.NoToneMapping }}>
         <hemisphereLight args={[0xffffff, 0x000000, 3.0]} />
         <directionalLight position={[x, y, z]} />
         {/* <Astronaut/> */}
-        <Model/>
 
         <Stars radius={300} depth={60} count={8000} factor={6} fade />
         <Earth refEarth={EarthRef} />
+        <Electroswing ref={shipRefo} wireframe={wireframe}/>
+          {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
+     {/* <Astronaut/> */}
+          <Planet
+          texturePath="./textures/neptune.jpeg"
+          size={1.8}
+          position={[2, 24, -160]}
+          rotationSpeed={0.003}
+          planetRef={NeptuneRef}
+        />
+        <PlanetWithRings
+          planetTexture="./textures/8k_jupiter.jpg"
+          ringTexture="./textures/Rings_Tex.jpeg"
+          size={2.5}
+          ringInner={3}
+          ringOuter={5}
+          position={[80, 30, -150]}
+          rotationSpeed={0.0003}
+          groupRef={JupiterRef}
+        />
+
         
         <Satellite earthRef={EarthRef} />
-        <Spaceship ref={shipRefo} />
+      
         <CameraScrollAnimation
           earthRef={EarthRef}
 shipRefo={shipRefo}
+setWireframe={setWireframe}
         />
 
 
