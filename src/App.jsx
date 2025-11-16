@@ -32,10 +32,18 @@ function App() {
 
           <section style={{ height: "100vh" }} >Section 2 </section>
           <section style={{ height: "100vh" }}>Section 3 </section>
-          <section id="section-4"  style={{ height: "100vh" }}>Section 4 </section>
+          <section id="section-4"  style={{ height: "100vh" }}>
+            	
+	<div className="blueprint h-full" >
+		
+    </div>
+             </section>
           <section style={{ height: "100vh" }}>Section 5 </section>
           <section style={{ height: "100vh" }}>Section 6</section>
-        </div>
+           </div>
+           <section style={{ height: "100vh" }} id="section-7" >Section 7</section>
+            <section style={{ height: "100vh" }} id="section-8" >Section 8</section>
+       
 
         <Footer />
         <ScrollToTopButton />

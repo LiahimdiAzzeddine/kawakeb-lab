@@ -87,7 +87,7 @@ function Earth({ refEarth }) {
 
 
 
-function CameraScrollAnimation({ earthRef,shipRefo,setWireframe }) {
+function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -123,10 +123,31 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe }) {
     end: "bottom center",
     onEnter: () => setWireframe(true),
     onLeaveBack: () => setWireframe(false),
-    // onLeave: () => setWireframe(false),
-    // onEnterBack: () => setWireframe(true),
-    markers: true
+    onLeave: () => setWireframe(false),
+    onEnterBack: () => setWireframe(true),
   });
+  ScrollTrigger.create({
+    trigger: "#section-7",
+    start: "top bottom",
+    end: "bottom top",
+    markers:true,
+ onUpdate: (self) => {
+		console.log(
+			'progress:',
+			self.progress.toFixed(3),
+			'direction:',
+			self.direction,
+			'velocity',
+			self.getVelocity()
+		);
+    astronaut.current.position.y=-600*Number(self.progress)
+	}
+  });
+
+
+
+
+
 
     return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
   }, [camera]);
@@ -177,6 +198,7 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe }) {
 
 function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
   const ref = planetRef || useRef();
+  
   const map = useLoader(THREE.TextureLoader, texturePath);
   useFrame(() => {
     ref.current.rotation.y += rotationSpeed;
@@ -196,6 +218,8 @@ export default function BackgroundCanvas() {
   const shipRefo=useRef();
    const NeptuneRef = useRef();
   const JupiterRef=useRef();
+        const AstronautRef = useRef();
+
   const [wireframe,setWireframe]=useState(false)
 
   return (
@@ -207,10 +231,10 @@ export default function BackgroundCanvas() {
 
         <Stars radius={300} depth={60} count={8000} factor={6} fade />
         <Earth refEarth={EarthRef} />
-        <Electroswing ref={shipRefo} wireframe={wireframe}/>
+        <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe}/>
           {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
      {/* <Astronaut/> */}
-          <Planet
+          {/* <Planet
           texturePath="./textures/neptune.jpeg"
           size={1.8}
           position={[2, 24, -160]}
@@ -226,7 +250,7 @@ export default function BackgroundCanvas() {
           position={[80, 30, -150]}
           rotationSpeed={0.0003}
           groupRef={JupiterRef}
-        />
+        /> */}
 
         
         <Satellite earthRef={EarthRef} />
@@ -235,6 +259,7 @@ export default function BackgroundCanvas() {
           earthRef={EarthRef}
 shipRefo={shipRefo}
 setWireframe={setWireframe}
+astronaut={AstronautRef}
         />
 
 
