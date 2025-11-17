@@ -1,20 +1,76 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
-export const Electroswing = forwardRef(({ wireframe = false, AstronautRef, ...props }, ref) => {
-
-   const { nodes, materials, animations } = useGLTF("/electroswing.glb");
+import { ScrollTrigger } from "gsap/all";
+export const Electroswing = forwardRef(
+  ({ wireframe = false, AstronautRef, ...props }, ref) => {
+    const { nodes, materials, animations } = useGLTF("/electroswing.glb");
 
     const { actions } = useAnimations(animations, ref);
- // Lance l'animation Seat uniquement quand animations est prêt
-  // useEffect(() => {
-  //   if (actions["Seat"]) {
-  //     actions["Seat"].play();
-  //   }
-  // }, [actions]);
 
- 
-   
+    // Lance l'animation Seat uniquement quand animations est prêt
+    // useEffect(() => {
+    //   if (actions["Seat"]) {
+    //     actions["Seat"].play();
+    //   }
+    // }, [actions]);
+    useEffect(() => {
+      if (!AstronautRef.current || !actions) return;
+
+      const jump = actions["Jump"];
+      const float = actions["Float-Legacy Slot"];
+
+      if (!jump || !float) {
+        console.warn("Animations manquantes !");
+        return;
+      }
+
+      // Setup Jump (scrub)
+      jump.reset().play();
+      jump.paused = true;
+
+      // Setup Float
+      float.reset();
+      float.paused = true;
+      float.loop = THREE.LoopRepeat;
+
+      ScrollTrigger.create({
+        trigger: "#section-7",
+        start: "top bottom",
+        end: "center top",
+        markers: true,
+
+        // 🔥 Le scroll avance Jump
+        onUpdate: (self) => {
+          const p = self.progress;
+
+          // Mouvement de l'astronaute
+          AstronautRef.current.position.y = -600 * p;
+
+          // Scrub Jump tant qu'on n'est pas à la fin
+          if (p < 1) {
+            const duration = jump.getClip().duration;
+            jump.time = duration * p;
+          }
+        },
+
+        // 🔥 Quand on QUITTE la section → Float démarre
+        onLeave: () => {
+          jump.paused = true; // on fige Jump
+          float.reset().play();
+          float.paused = false;
+        },
+
+        // 🔥 Quand on revient en arrière → Float s’arrête, Jump reprend
+        onEnterBack: () => {
+          float.stop();
+          float.paused = true;
+          jump.paused = true; // Jump est en scrub, donc toujours "paused"
+        },
+      });
+
+      return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    }, [actions]);
 
     if (materials["Material.001"]) {
       materials["Material.001"].transparent = true;
@@ -33,7 +89,7 @@ export const Electroswing = forwardRef(({ wireframe = false, AstronautRef, ...pr
         dispose={null}
         scale={0.002}
         rotation={[0, -Math.PI / 2, 0]}
-        position={[2.5, 0.4, -2]}
+        position={[3.5, 0.4, -2]}
       >
         <group name="Scene" rotation={[0.1, -Math.PI / 2, 0]}>
           <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
@@ -142,7 +198,7 @@ export const Electroswing = forwardRef(({ wireframe = false, AstronautRef, ...pr
           <group name="lower_Rotor" position={[0, 0, -1.53]}>
             <group name="Object_22" position={[0, -7.894, 15.487]} />
           </group>
-          <group name="SK_M_MED_Astronaut_01ao" ref={AstronautRef} >
+          <group name="SK_M_MED_Astronaut_01ao" ref={AstronautRef}>
             <skinnedMesh
               name="SK_M_MED_Astronaut_01mo"
               geometry={nodes.SK_M_MED_Astronaut_01mo.geometry}

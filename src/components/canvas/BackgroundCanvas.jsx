@@ -126,23 +126,23 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
     onLeave: () => setWireframe(false),
     onEnterBack: () => setWireframe(true),
   });
-  ScrollTrigger.create({
-    trigger: "#section-7",
-    start: "top bottom",
-    end: "bottom top",
-    markers:true,
- onUpdate: (self) => {
-		console.log(
-			'progress:',
-			self.progress.toFixed(3),
-			'direction:',
-			self.direction,
-			'velocity',
-			self.getVelocity()
-		);
-    astronaut.current.position.y=-600*Number(self.progress)
-	}
-  });
+//   ScrollTrigger.create({
+//     trigger: "#section-7",
+//     start: "top bottom",
+//     end: "center top",
+//     markers:true,
+//  onUpdate: (self) => {
+// 		console.log(
+// 			'progress:',
+// 			self.progress.toFixed(3),
+// 			'direction:',
+// 			self.direction,
+// 			'velocity',
+// 			self.getVelocity()
+// 		);
+//     astronaut.current.position.y=-600*Number(self.progress)
+// 	}
+//   });
 
 
 
