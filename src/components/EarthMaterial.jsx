@@ -7,7 +7,7 @@ const defaultSunDirection = new THREE.Vector3(-2, 0.5, 1.5).normalize();
 function getEarthMat(sunDirection = defaultSunDirection) {
   const map = useLoader(
     THREE.TextureLoader, 
-    "./textures/Terrestrial-Clouds-EQUIRECTANGULAR-1-1024x512.png"
+    "./textures/earth-daymap-4k.jpg"
 );
   const nightMap = useLoader(
     THREE.TextureLoader,

@@ -83,6 +83,7 @@ export const Electroswing = forwardRef(
       wireframe: true,
     });
     return (
+      
       <group
         ref={ref}
         {...props}

@@ -1,62 +1,40 @@
-import * as THREE from "three";
+import { shaderMaterial } from '@react-three/drei';
+import { extend } from '@react-three/fiber';
+import * as THREE from 'three';
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 
-const loader = new THREE.TextureLoader();
+// Create a simple procedural nebula shader
+const NebulaMaterial = shaderMaterial(
+  { time: 0.0 },
+  `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+  }`,
+  `
+  uniform float time;
+  varying vec2 vUv;
 
-function getSprite({ hasFog, color, opacity, path, pos, size }) {
-  const spriteMat = new THREE.SpriteMaterial({
-    color,
-    fog: hasFog,
-    map: loader.load(path),
-    transparent: true,
-    opacity,
-  });
-  spriteMat.color.offsetHSL(0, 0, Math.random() * 0.2 - 0.1);
-  const sprite = new THREE.Sprite(spriteMat);
-  sprite.position.set(pos.x, -pos.y, pos.z);
-  size += Math.random() - 0.5;
-  sprite.scale.set(size, size, size);
-  sprite.material.rotation = 0;
-  return sprite;
-}
-
-function getSprites({
-  hasFog = true,
-  hue = 0.65,
-  numSprites = 8,
-  opacity = 0.2,
-  path = "./rad-grad.png",
-  radius = 10,
-  sat = 0.5,
-  size = 24,
-  z = -10.5,
-} = {}) {
-  const layerGroup = new THREE.Group();
-  for (let i = 0; i < numSprites; i += 1) {
-    let angle = (i / numSprites) * Math.PI * 2;
-    const pos = new THREE.Vector3(
-      Math.cos(angle) * Math.random() * radius,
-      Math.sin(angle) * Math.random() * radius,
-      z + Math.random()
-    );
-    // const length = new THREE.Vector3(pos.x, pos.y, 0).length();
-    // const hue = 0.0; // (0.9 - (radius - length) / radius) * 1;
-
-    let color = new THREE.Color().setHSL(hue, 1, sat);
-    const sprite = getSprite({ hasFog, color, opacity, path, pos, size });
-    layerGroup.add(sprite);
+  void main() {
+    vec2 uv = vUv * 2.0 - 1.0;
+    float color = 0.5 + 0.5*sin(time + uv.x*10.0)*cos(time + uv.y*10.0);
+    gl_FragColor = vec4(vec3(color*0.6, color*0.8, color), 1.0);
   }
-  return layerGroup;
-}
+`
+);
 
-function Nebula() {
-  const sprites = getSprites({
-    numSprites: 8,
-    radius: 10,
-    z: -10.5,
-    size: 24,
-    opacity: 0.2,
-    path: "./rad-grad.png",
-  });
-  return <primitive object={sprites} />
+extend({ NebulaMaterial });
+
+export function ProceduralNebula() {
+  const ref = useRef();
+  useFrame(({ clock }) => (ref.current.time = clock.getElapsedTime()));
+
+  return (
+    <mesh scale={500}>
+      <sphereGeometry args={[1, 32, 32]} />
+      <nebulaMaterial ref={ref} side={THREE.BackSide} />
+    </mesh>
+  );
 }
-export default Nebula;

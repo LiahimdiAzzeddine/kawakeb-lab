@@ -20,12 +20,12 @@ const Hero = () => {
         animate="visible"
         className="flex flex-row items-center justify-center w-full z-10"
       >
-        <div className="h-full w-full flex flex-col gap-6 justify-top m-auto text-start sm:mt-20">
+        <div className="h-full w-full flex flex-col gap-6 justify-top m-auto text-start sm:mt-0 sm:mb-28">
           {/* <Statusbtn /> */}
 
           <motion.div
             variants={slideInFromLeft(0.5)}
-            className="Microgram flex flex-col gap-6 mt-16 text-4xl sm:text-5xl font-bold text-white max-w-[600px]"
+            className="Microgram flex flex-col gap-6 mt-16 sm:mt-0 text-4xl sm:text-5xl font-bold text-white max-w-[600px]"
           >
             <span>
               {title}
@@ -60,15 +60,15 @@ const Hero = () => {
         <div
           className="min-w-[650] min-h-[650] w-full h-full flex justify-center items-top hidden sm:flex "
         >
-          <img
+          {/* <img
             src={imageUrl}
             alt="work icons"
          className="z-50"
-          />
+          /> */}
         </div>
       </motion.div>
     </section>
   );
 };
 
-export default SectionWrapper(Hero, "hero");
+export default SectionWrapper(Hero, "hero",'z-50');

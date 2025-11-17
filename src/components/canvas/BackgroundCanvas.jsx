@@ -1,6 +1,6 @@
 // src/components/BackgroundCanvas.jsx
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { OrbitControls, Stars, Trail } from "@react-three/drei";
+import { Environment, Lightformer, OrbitControls, Sky, Stars, Trail } from "@react-three/drei";
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,6 +10,10 @@ import EarthMaterial from "../EarthMaterial";
 import { Spaceship } from "../Spaceship";
 import { Astronaut } from "../Astronaut";
 import { Electroswing } from "../Electroswing";
+import {
+  CubeTextureLoader,
+} from "three";
+import QonoSMaterial from "./QonoSMaterial";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,7 +88,22 @@ function Earth({ refEarth }) {
     </group>
   );
 }
+function Qono({ planetRef,position }) {
+  useFrame(() => {
+    planetRef.current.rotation.y += 0.0009;
+  });
+  const axialTilt = (23.4 * Math.PI) / 180;
 
+  return (
+    <group rotation-z={axialTilt} position={position} scale={1.1}>
+      <mesh ref={planetRef}>
+        <icosahedronGeometry args={[2, 64]} />
+        <QonoSMaterial sunDirection={sunDirection} />
+
+      </mesh>
+    </group>
+  );
+}
 
 
 function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
@@ -155,62 +174,6 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
   return null;
 }
 
- function PlanetWithRings({
-  planetTexture,
-  ringTexture,
-  size = 2,
-  ringInner = 2.5,
-  ringOuter = 4,
-  position = [0, 0, 0],
-  rotationSpeed = 0.0005,
-  groupRef,
-}) {
-  const planetRef = useRef();
-  const ringRef = useRef();
-  const axialTilt = (30.4 * Math.PI) / 180;
-
-  const planetMap = useLoader(THREE.TextureLoader, planetTexture);
-  const ringMap = useLoader(THREE.TextureLoader, ringTexture);
-
-  useFrame(() => {
-    planetRef.current.rotation.y += rotationSpeed;
-    ringRef.current.rotation.z += rotationSpeed * 0.2;
-  });
-
-  return (
-    <group ref={groupRef} rotation-x={axialTilt} position={position}>
-      <mesh ref={planetRef}>
-        <sphereGeometry args={[size, 64, 64]} />
-        <meshStandardMaterial map={planetMap} />
-      </mesh>
-      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[ringInner, ringOuter, 128]} />
-        <meshBasicMaterial
-          map={ringMap}
-          side={THREE.DoubleSide}
-          transparent
-          opacity={0.8}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
-  const ref = planetRef || useRef();
-  
-  const map = useLoader(THREE.TextureLoader, texturePath);
-  useFrame(() => {
-    ref.current.rotation.y += rotationSpeed;
-  });
-
-  return (
-    <mesh ref={ref} position={position}>
-      <sphereGeometry args={[size, 64, 64]} />
-      <meshStandardMaterial map={map} />
-    </mesh>
-  );
-}
 
 export default function BackgroundCanvas() {
   const { x, y, z } = sunDirection;
@@ -224,34 +187,30 @@ export default function BackgroundCanvas() {
 
   return (
     <div className="fixed inset-0 w-screen h-screen z-10">
-      <Canvas camera={{ position: [0, 0.1, 5], fov: 50 }} gl={{ toneMapping: THREE.NoToneMapping }}>
+      <Canvas camera={{ position: [0, 0.1, 5], fov:40 }} gl={{ toneMapping: THREE.NoToneMapping }}>
+        {/* <SkyBox/> */}
+     <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/blue_photo_studio_1k.hdr" resolution={512} >
+        <group rotation={[0, 0, 1]}>
+          <Lightformer form="circle" intensity={10} position={[0, 10, -10]} scale={20} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+          <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
+          <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+          <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[0, 1, 0]} scale={[10, 100, 1]} />
+        </group>
+      </Environment>
+        
         <hemisphereLight args={[0xffffff, 0x000000, 3.0]} />
         <directionalLight position={[x, y, z]} />
-        {/* <Astronaut/> */}
 
         <Stars radius={300} depth={60} count={8000} factor={6} fade />
         <Earth refEarth={EarthRef} />
+        
         <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe}/>
+
           {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
      {/* <Astronaut/> */}
-          {/* <Planet
-          texturePath="./textures/neptune.jpeg"
-          size={1.8}
-          position={[2, 24, -160]}
-          rotationSpeed={0.003}
-          planetRef={NeptuneRef}
-        />
-        <PlanetWithRings
-          planetTexture="./textures/8k_jupiter.jpg"
-          ringTexture="./textures/Rings_Tex.jpeg"
-          size={2.5}
-          ringInner={3}
-          ringOuter={5}
-          position={[80, 30, -150]}
-          rotationSpeed={0.0003}
-          groupRef={JupiterRef}
-        /> */}
-
+     <Qono position={[14,3.5, -25]} planetRef={NeptuneRef} />
+          
+      
         
         <Satellite earthRef={EarthRef} />
       

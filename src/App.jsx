@@ -13,7 +13,9 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BackgroundCanvas from "./components/canvas/BackgroundCanvas";
-import { OrbitControls } from "@react-three/drei";
+import Projects from "./components/Projects";
+import HypercasualGames from "./components/HypercasualGames";
+import TeamMembers from "./components/TeamMembers";
 
 function App() {
   return (
@@ -27,8 +29,11 @@ function App() {
         ><Navbar />
           <Video />
           <Hero />
+          
           <About />
-         
+          <TeamMembers/>
+         <Projects/>
+         <HypercasualGames/>
 
           <section style={{ height: "100vh" }} >Section 2 </section>
           <section style={{ height: "100vh" }}>Section 3 </section>
@@ -44,7 +49,7 @@ function App() {
            <section style={{ height: "100vh" }} id="section-7" >Section 7</section>
             <section style={{ height: "100vh" }} id="section-8" >Section 8</section>
        
-
+<Contact/>
         <Footer />
         <ScrollToTopButton />
 
