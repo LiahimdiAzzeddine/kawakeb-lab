@@ -23,7 +23,7 @@ function App() {
 
       <div className="">
         {/* Canvas plein écran en fond */}
-        <BackgroundCanvas />
+        {/* <BackgroundCanvas /> */}
 
         <div id="scroll-sections"
         ><Navbar />
@@ -31,7 +31,6 @@ function App() {
           <Hero />
           
           <About />
-          <TeamMembers/>
          <Projects/>
          <HypercasualGames/>
 

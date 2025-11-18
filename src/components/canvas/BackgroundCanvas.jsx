@@ -212,7 +212,7 @@ export default function BackgroundCanvas() {
           
       
         
-        <Satellite earthRef={EarthRef} />
+        {/* <Satellite earthRef={EarthRef} /> */}
       
         <CameraScrollAnimation
           earthRef={EarthRef}

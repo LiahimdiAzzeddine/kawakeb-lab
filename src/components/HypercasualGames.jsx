@@ -15,8 +15,9 @@ const games = [
     gradient: "from-orange-400 via-red-500 to-pink-500",
     accentColor: "orange",
     description: "A highly engaging physics-based hypercasual game that has captured the attention of hundreds of thousands of players worldwide.",
-    androidUrl: "#",
-    iosUrl: "#"
+    androidUrl: "https://play.google.com/store/apps/details?id=com.tastypill.ballsfactory&hl=fr",
+    iosUrl: "https://apps.apple.com/us/app/balls-factory/id6503159875",
+    img:"1.webp"
   },
   {
     title: "MONEY BANK 3D",
@@ -28,8 +29,9 @@ const games = [
     gradient: "from-green-400 via-emerald-500 to-teal-500",
     accentColor: "emerald",
     description: "A viral sensation that achieved massive global success, demonstrating our ability to create games with widespread appeal and retention.",
-    androidUrl: "#",
-    iosUrl: "#"
+    androidUrl: "https://play.google.com/store/apps/details?id=com.tp.moneybank",
+    iosUrl: "https://apps.apple.com/ca/app/money-bank-3d/id1523673634?l=fr-CA",
+     img:"2.webp"
   },
   {
     title: "BOTTLE FACTORY",
@@ -41,16 +43,29 @@ const games = [
     gradient: "from-blue-400 via-cyan-500 to-teal-500",
     accentColor: "cyan",
     description: "An innovative bottle production simulation game that challenges players with unique gameplay mechanics and strategic resource management.",
-    androidUrl: "#",
-    iosUrl: "#"
+    androidUrl: "https://play.google.com/store/apps/details?id=com.tastypill.bottlefactory",
+    iosUrl: "#",
+     img:"3.webp"
   }
 ];
 
 const HypercasualGames = () => {
   return (
     <div className="relative z-50 w-full">
+       <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="Microgram pb-1 uppercase flex flex-col gap-6 mt-16 sm:mt-0 text-3xl sm:text-4xl font-bold text-white max-w-[600px]"
+            >
+             
+              <span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8e8e8] to-[#00a8b5]">
+                  Viral gaming experiences
+                </span>
+              </span>
+            </motion.div>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Viral gaming experiences</p>
         <h2 className={styles.sectionHeadText}>Hypercasual Games.</h2>
       </motion.div>
 
@@ -58,10 +73,18 @@ const HypercasualGames = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px] mb-16"
       >
+                <div className="group relative bg-gradient-to-br text-base leading-[30px] z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 p-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
+<div className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-5 rounded-e-3xl`}  />
+
+              {/* Decorative border accent */}
+              <div
+                className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-blue-500`}
+              />
         Our hypercasual games have reached millions of players worldwide, combining 
         addictive gameplay mechanics with polished execution. These titles showcase our 
         ability to create fast-paced, engaging experiences optimized for viral growth 
         and sustained player retention.
+        </div>
       </motion.p>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -84,8 +107,10 @@ const HypercasualGames = () => {
                 {/* Placeholder content */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm">
                   <div className="text-center">
-                    <div className={`w-28 h-28 mx-auto mb-4 rounded-3xl bg-gradient-to-br ${game.gradient} opacity-50 animate-pulse`} />
-                    <p className="text-white/90 text-lg font-bold tracking-wider">{game.title}</p>
+                    <div className={`w-28 h-28 mx-auto mb-4 rounded-3xl bg-gradient-to-br ${game.gradient}  `} >
+                      <img src={game.img} className="rounded-3xl"/>
+                      </div>
+                    <p className="text-white/90 text-lg font-bold tracking-wider MicrogramBold">{game.title}</p>
                   </div>
                 </div>
 
@@ -99,12 +124,12 @@ const HypercasualGames = () => {
               {/* Content section */}
               <div className="relative p-6 space-y-4">
                 {/* Title */}
-                <h3 className="text-white font-black text-2xl tracking-wider group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
+                <h3 className="text-white font-black text-2xl tracking-wider group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-300 MicrogramBold">
                   {game.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 text-xs leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed Microgram">
                   {game.description}
                 </p>
 
@@ -124,10 +149,10 @@ const HypercasualGames = () => {
 
                         {/* Stat info */}
                         <div className="flex-1">
-                          <p className="text-gray-500 text-xs uppercase tracking-wide mb-0.5">
+                          <p className="text-gray-500 text-xs uppercase tracking-wide mb-0.5 Microgram">
                             {stat.label}
                           </p>
-                          <p className="text-white font-bold text-xl">
+                          <p className="text-white font-bold text-xl MicrogramBold">
                             {stat.value}
                           </p>
                         </div>
@@ -149,19 +174,19 @@ const HypercasualGames = () => {
                     href={game.androidUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 text-white font-semibold text-sm group/btn"
+                    className="flex MicrogramBold items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 text-white font-semibold text-sm group/btn"
                   >
                     <Smartphone className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                    <span>Android</span>
+                    <span className="MicrogramBold">Android</span>
                   </a>
                   <a
                     href={game.iosUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 text-white font-semibold text-sm group/btn"
+                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 text-white font-semibold text-sm group/btn"
                   >
                     <Smartphone className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                    <span>iOS</span>
+                    <span className="MicrogramBold">iOS</span>
                   </a>
                 </div>
 
@@ -176,26 +201,26 @@ const HypercasualGames = () => {
       {/* Summary stats */}
       <motion.div
         variants={fadeIn("up", "spring", 0.4, 0.75)}
-        className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-white/10 backdrop-blur-sm"
+        className="mt-16 p-8 rounded-xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-white/10 backdrop-blur-sm"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
-            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 mb-2">
+            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 mb-2 MicrogramBold">
               30M+
             </p>
-            <p className="text-gray-400 text-sm uppercase tracking-wide">Total Downloads</p>
+            <p className="text-gray-400 text-sm uppercase tracking-wide Microgram">Total Downloads</p>
           </div>
           <div>
-            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500 mb-2">
+            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500 mb-2 MicrogramBold">
               300K+
             </p>
-            <p className="text-gray-400 text-sm uppercase tracking-wide">Monthly Active Users</p>
+            <p className="text-gray-400 text-sm uppercase tracking-wide Microgram">Monthly Active Users</p>
           </div>
           <div>
-            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2">
+            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2 MicrogramBold">
               4.6+
             </p>
-            <p className="text-gray-400 text-sm uppercase tracking-wide">Average Rating</p>
+            <p className="text-gray-400 text-sm uppercase tracking-wide Microgram">Average Rating</p>
           </div>
         </div>
       </motion.div>

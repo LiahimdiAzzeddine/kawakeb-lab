@@ -22,6 +22,84 @@ import {
   foodhea,
   foodhealogo
 } from "../assets";
+import { Users, Code, Palette, Gamepad2, Lightbulb, Box } from "lucide-react";
+
+export const teamStructure = {
+  founders: [
+    { 
+      name: "Othman Ramzi", 
+      role: "Co-founder and CEO",
+      gradient: "from-purple-400 via-violet-500 to-purple-600",
+      icon: Users
+    },
+    { 
+      name: "Khalil Bennis", 
+      role: "Co-founder and CTO",
+      gradient: "from-blue-400 via-indigo-500 to-blue-600",
+      icon: Code
+    },
+  ],
+  consultant: [
+    { 
+      name: "Lotfi ElAchak", 
+      role: "Consultant",
+      gradient: "from-amber-400 via-orange-500 to-amber-600",
+      icon: Lightbulb
+    },
+  ],
+  leadership: [
+    { 
+      name: "Janin Fatima Zohra", 
+      role: "Team Lead",
+      gradient: "from-pink-400 via-rose-500 to-pink-600",
+      icon: Users
+    },
+  ],
+  team: [
+    { 
+      name: "Liahimdi Azzeddine", 
+      role: "Backend Developer",
+      gradient: "from-green-400 via-emerald-500 to-teal-500",
+      icon: Code
+    },
+    { 
+      name: "Abderahman BenMousa", 
+      role: "Branding",
+      gradient: "from-orange-400 via-red-500 to-pink-500",
+      icon: Palette
+    },
+    { 
+      name: "Doud Laghmich", 
+      role: "3D Artist",
+      gradient: "from-cyan-400 via-blue-500 to-cyan-600",
+      icon: Box
+    },
+    { 
+      name: "Omar Aharrar", 
+      role: "Unity 3D Developer",
+      gradient: "from-violet-400 via-purple-500 to-violet-600",
+      icon: Gamepad2
+    },
+    { 
+      name: "Soulaimane Maghroud", 
+      role: "Game Designer",
+      gradient: "from-yellow-400 via-orange-500 to-yellow-600",
+      icon: Gamepad2
+    },
+    { 
+      name: "Ghita Sbai", 
+      role: "Unity 3D",
+      gradient: "from-indigo-400 via-blue-500 to-indigo-600",
+      icon: Code
+    },
+    { 
+      name: "Nasrellah Elkhalifi", 
+      role: "3D Artist",
+      gradient: "from-teal-400 via-cyan-500 to-teal-600",
+      icon: Box
+    },
+  ]
+};
 
 export const navLinks = [
   {

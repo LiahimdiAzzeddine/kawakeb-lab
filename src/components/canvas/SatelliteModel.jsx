@@ -1,10 +1,10 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Satellite(props) {
+export function SatelliteModel(props) {
   const { nodes, materials } = useGLTF('/satellite-opt.glb')
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={0.04}>
       <mesh
         castShadow
         receiveShadow

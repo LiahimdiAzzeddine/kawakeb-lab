@@ -47,6 +47,12 @@ html
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'MicrogramBold';
+  src: url('/fonts/Microgramma D Extended Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;
@@ -57,6 +63,9 @@ html
 }
 .Navlink,.Microgram{
   font-family: 'Microgram';
+}
+.MicrogramBold{
+  font-family: 'MicrogramBold';
 }
 @media (min-width: 1830px) {
   .custom-max-w {
