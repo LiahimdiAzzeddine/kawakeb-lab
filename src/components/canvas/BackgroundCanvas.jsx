@@ -134,9 +134,10 @@ tl.to(shipRefo.current.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" 
     tl.to(shipRefo.current.rotation, { y: 0, duration: 0.2, ease: "power1.inOut" }, '<0.5');
     tl.to(shipRefo.current.position, { x: -2, duration: 1, ease: "power1.inOut" });
     tl.to(shipRefo.current.rotation, { x: Math.PI / 12, y: -Math.PI / 2, duration: 0.5, ease: "power1.inOut" }, '<');
-    tl.to(shipRefo.current.position, { x:1.2, y: -11, duration: 1, ease: "power1.inOut" });
-    tl.to(shipRefo.current.rotation, { x: Math.PI / 2, y: Math.PI / 2, z: -Math.PI / 2, duration: 1, ease: "power1.inOut" }, '<');
-    tl.to(camera, { fov: 50, duration: 0.7, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+    tl.to(shipRefo.current.position, { x:1.1, y: -11, duration: 1, ease: "power1.inOut" });
+    tl.to(shipRefo.current.rotation, { x: Math.PI / 2, y: Math.PI / 2, z: -Math.PI / 2, duration:2, ease: "power1.inOut" }, '<');
+    tl.to(camera, { fov: 50, duration: 2, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+    tl.to(shipRefo.current.position, { x:4, duration: 1, ease: "power1.inOut" });
     //
     //tl.to(shipRefo.current.rotation, { y: -Math.PI / 2, x: 0, duration: 2, ease: "power1.inOut" });
     // tl.to(shipRefo.current.position, { x: 0, duration: 1, ease: "power1.inOut" }, '<');
