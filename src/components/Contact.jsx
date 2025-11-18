@@ -203,10 +203,7 @@ const Contact = () => {
                 <div className="w-32 h-32 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center">
                   <MessageSquare className="w-16 h-16 text-white" strokeWidth={2} />
                 </div>
-                <p className="text-white/70 text-lg Microgram">Votre modèle 3D ici</p>
-                <p className="text-white/50 text-sm mt-2 Microgram">
-                  Intégrez votre canvas Three.js ou autre
-                </p>
+             
               </div>
             </div>
 
