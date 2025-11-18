@@ -73,7 +73,6 @@ function Earth({ refEarth }) {
   useFrame(() => {
     refEarth.current.rotation.y += 0.001;
   });
-  const map = useLoader(THREE.TextureLoader, "./textures/earth-daymap-4k.jpg");
 
   const axialTilt = (23.4 * Math.PI) / 180;
 
@@ -82,13 +81,12 @@ function Earth({ refEarth }) {
       <mesh ref={refEarth}>
         <icosahedronGeometry args={[2, 64]} />
         <EarthMaterial sunDirection={sunDirection} />
-        {/* <meshStandardMaterial map={map} /> */}
         <AtmosphereMesh />
       </mesh>
     </group>
   );
 }
-function Qono({ planetRef,position }) {
+function Qono({ planetRef, position }) {
   useFrame(() => {
     planetRef.current.rotation.y += 0.0009;
   });
@@ -106,7 +104,7 @@ function Qono({ planetRef,position }) {
 }
 
 
-function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
+function CameraScrollAnimation({ earthRef, shipRefo, setWireframe, astronaut }) {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -120,48 +118,60 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
       },
     });
 
-    // tl.to(camera.position, { y: 0.1, z: 5, duration: 0.3, ease: "power1.inOut" });
-    tl.to(shipRefo.current.position,{x:0,z:0,duration:0.5, ease: "power1.inOut"},'<')
-    tl.to(shipRefo.current.rotation, { y: 0,x: Math.PI/2, duration: 1, ease: "power1.inOut" },'<');
-    tl.to(camera.position,{ y: -0.8, duration:1, ease: "power1.inOut" },'<');
-  tl.to(earthRef.current.position,{  z:-2, duration:1, ease: "power1.inOut" },'<');
-  
- tl.to(shipRefo.current.position, { y:-1.5, duration: 2, ease: "power1.inOut" },'<0.1');
- //apartir d ici le movement est n'est pas naturell il faut faire une solution
-       tl.to(shipRefo.current.position, { x: 2, duration:1.5, ease: "power1.inOut" });
-       tl.to(earthRef.current.position,{ y:6,x:2, duration:1.5, ease: "power1.inOut" },'<');
-    
- tl.to(shipRefo.current.rotation, {y:-Math.PI/2,x:0, duration: 2, ease: "power1.inOut" });
- tl.to(shipRefo.current.position, { x:0, duration:1, ease: "power1.inOut" },'<');
-  tl.to(shipRefo.current.rotation, {y:Math.PI/2, duration: 2, ease: "power1.inOut" });
+    tl.to(shipRefo.current.position, { x: 0, duration: 0.7, ease: "power1.inOut" })
+    tl.to(shipRefo.current.position, { z: 2.2, duration: 0.7, ease: "power1.inOut" }, '<0.1')
+    tl.to(shipRefo.current.rotation, { y: 0, x: Math.PI / 2, duration: 0.7, ease: "power1.inOut" }, '<0.1');
+
+    tl.to(camera, { fov: 75, duration: 1.5, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
 
 
-   ScrollTrigger.create({
-    trigger: "#section-4",
-    start: "top center",
-    end: "bottom center",
-    onEnter: () => setWireframe(true),
-    onLeaveBack: () => setWireframe(false),
-    onLeave: () => setWireframe(false),
-    onEnterBack: () => setWireframe(true),
-  });
-//   ScrollTrigger.create({
-//     trigger: "#section-7",
-//     start: "top bottom",
-//     end: "center top",
-//     markers:true,
-//  onUpdate: (self) => {
-// 		console.log(
-// 			'progress:',
-// 			self.progress.toFixed(3),
-// 			'direction:',
-// 			self.direction,
-// 			'velocity',
-// 			self.getVelocity()
-// 		);
-//     astronaut.current.position.y=-600*Number(self.progress)
-// 	}
-//   });
+    tl.to(shipRefo.current.position, { y: -2, duration: 0.8, ease: "power1.inOut" }, '<');
+    tl.to(camera.position, { y: -2, duration: 0.8, ease: "power1.inOut" }, '<');
+
+    tl.to(camera.position, { y: -10, duration: 5, ease: "power1.inOut" });
+    tl.to(shipRefo.current.position, { y: -9, duration: 5, ease: "power1.inOut" }, '<');
+    // //apartir d ici le movement est n'est pas naturell il faut faire une solution
+    //
+    tl.to(shipRefo.current.rotation, { y: Math.PI / 6, duration: 0.5, ease: "power1.inOut" }, '<');
+    tl.to(shipRefo.current.position, { x: 2, duration: 0.5, ease: "power1.inOut" }, '<');
+    tl.to(shipRefo.current.rotation, { y: 0, duration: 0.2, ease: "power1.inOut" }, '<0.5');
+    tl.to(shipRefo.current.position, { x: -2, duration: 1, ease: "power1.inOut" });
+    tl.to(shipRefo.current.rotation, { x: Math.PI / 12, y: -Math.PI / 2, duration: 0.5, ease: "power1.inOut" }, '<');
+    tl.to(shipRefo.current.position, { x: 0.5, y: -10, duration: 1, ease: "power1.inOut" });
+    tl.to(shipRefo.current.rotation, { x: Math.PI / 2, y: Math.PI / 2, z: -Math.PI / 2, duration: 1, ease: "power1.inOut" }, '<');
+    tl.to(camera, { fov: 40, duration: 0.7, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+    //
+    //tl.to(shipRefo.current.rotation, { y: -Math.PI / 2, x: 0, duration: 2, ease: "power1.inOut" });
+    // tl.to(shipRefo.current.position, { x: 0, duration: 1, ease: "power1.inOut" }, '<');
+    //  tl.to(shipRefo.current.rotation, { y: Math.PI / 2, duration: 2, ease: "power1.inOut" });
+
+
+    ScrollTrigger.create({
+      trigger: "#section-2",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => setWireframe(true),
+      onLeaveBack: () => setWireframe(false),
+      onLeave: () => setWireframe(false),
+      onEnterBack: () => setWireframe(true),
+    });
+    //   ScrollTrigger.create({
+    //     trigger: "#section-7",
+    //     start: "top bottom",
+    //     end: "center top",
+    //     markers:true,
+    //  onUpdate: (self) => {
+    // 		console.log(
+    // 			'progress:',
+    // 			self.progress.toFixed(3),
+    // 			'direction:',
+    // 			self.direction,
+    // 			'velocity',
+    // 			self.getVelocity()
+    // 		);
+    //     astronaut.current.position.y=-600*Number(self.progress)
+    // 	}
+    //   });
 
 
 
@@ -174,51 +184,72 @@ function CameraScrollAnimation({ earthRef,shipRefo,setWireframe,astronaut }) {
   return null;
 }
 
+function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
+  const ref = planetRef || useRef();
+  const map = useLoader(THREE.TextureLoader, texturePath);
+  useFrame(() => {
+    ref.current.rotation.y += rotationSpeed;
+  });
+
+  return (
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[size, 64, 64]} />
+      <meshStandardMaterial map={map} />
+    </mesh>
+  );
+}
 
 export default function BackgroundCanvas() {
   const { x, y, z } = sunDirection;
   const EarthRef = useRef();
-  const shipRefo=useRef();
-   const NeptuneRef = useRef();
-  const JupiterRef=useRef();
-        const AstronautRef = useRef();
+  const shipRefo = useRef();
+  const NeptuneRef = useRef();
+  const JupiterRef = useRef();
+  const AstronautRef = useRef();
 
-  const [wireframe,setWireframe]=useState(false)
+  const [wireframe, setWireframe] = useState(false)
 
   return (
     <div className="fixed inset-0 w-screen h-screen z-10">
-      <Canvas camera={{ position: [0, 0.1, 5], fov:40 }} gl={{ toneMapping: THREE.NoToneMapping }}>
+      <Canvas camera={{ position: [0, 0.1, 5], fov: 40 }} gl={{ toneMapping: THREE.NoToneMapping }}>
         {/* <SkyBox/> */}
-     <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/blue_photo_studio_1k.hdr" resolution={512} >
-        <group rotation={[0, 0, 1]}>
-          <Lightformer form="circle" intensity={10} position={[0, 10, -10]} scale={20} onUpdate={(self) => self.lookAt(0, 0, 0)} />
-          <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
-          <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
-          <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[0, 1, 0]} scale={[10, 100, 1]} />
-        </group>
-      </Environment>
-        
+        <Environment files="./blue_photo_studio_1k.hdr" resolution={512} >
+          <group rotation={[0, 0, 1]}>
+            <Lightformer form="circle" intensity={10} position={[0, 10, -10]} scale={20} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+            <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
+            <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+            <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[0, 1, 0]} scale={[10, 100, 1]} />
+          </group>
+        </Environment>
+
         <hemisphereLight args={[0xffffff, 0x000000, 3.0]} />
         <directionalLight position={[x, y, z]} />
 
         <Stars radius={300} depth={60} count={8000} factor={6} fade />
         <Earth refEarth={EarthRef} />
-        
-        <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe}/>
 
-          {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
-     {/* <Astronaut/> */}
-     <Qono position={[14,3.5, -25]} planetRef={NeptuneRef} />
-          
-      
-        
-        {/* <Satellite earthRef={EarthRef} /> */}
-      
+        <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe} />
+
+        {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
+        {/* <Astronaut/> */}
+        <Qono position={[-14, 3, -25]} planetRef={NeptuneRef} />
+        <Planet
+          texturePath="./textures/c0bf2c169a377e96ee80b25245188c65.jpg"
+          size={1.8}
+          position={[35, -5, -70]}
+          rotationSpeed={0.003}
+          planetRef={JupiterRef}
+        />
+
+
+
+        <Satellite earthRef={EarthRef} />
+
         <CameraScrollAnimation
           earthRef={EarthRef}
-shipRefo={shipRefo}
-setWireframe={setWireframe}
-astronaut={AstronautRef}
+          shipRefo={shipRefo}
+          setWireframe={setWireframe}
+          astronaut={AstronautRef}
         />
 
 

@@ -69,10 +69,14 @@ const Projects = () => {
       <div className="mt-16 space-y-32">
         {projects.map((project, index) => (
           <motion.div
-            key={project.title}
-            variants={fadeIn("up", "spring", index * 0.15, 0.75)}
-            className="relative"
-          >
+  key={project.title}
+  variants={fadeIn("up", "spring", index * 0.15, 0.75)}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }} // très important pour mobile
+  className="relative z-50"
+>
+
             {/* Full-width project section */}
             <div className="relative min-h-[600px] flex items-center">
               {/* Background gradient overlay */}

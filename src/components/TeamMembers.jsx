@@ -27,7 +27,7 @@ const TeamMemberCard = ({ member, index, delay = 0, size = "normal" }) => {
         />
 
         <div
-          className={`relative ${isLarge ? "p-4" : "p-3"} flex items-center gap-3`}
+          className={`relative ${isLarge ? "p-3" : "p-2"} flex items-center gap-3`}
         >
           <div
             className={`relative flex-shrink-0 ${
@@ -81,7 +81,7 @@ const TeamMembers = () => {
    
     >
       <motion.div variants={textVariant()}>
-        <h2 className={styles.sectionHeadText}>Team.</h2>
+        <h2 className={styles.sectionHeadText2}>Team.</h2>
       </motion.div>
 
       <motion.p
@@ -97,7 +97,7 @@ const TeamMembers = () => {
       </motion.p>
 
       {/* TREE STRUCTURE */}
-      <div className="space-y-0 relative">
+      <div className="space-y-0 relative max-w-4xl">
 
         {/* Founders */}
         <div className="relative pb-16">
@@ -169,7 +169,7 @@ const TeamMembers = () => {
         </div>
 
         {/* Management */}
-        <div className="relative pb-20">
+        <div className="relative pb-20 pt-2">
           <div className="text-center mb-6">
             <span className="inline-block px-4 py-2 rounded-sm border-2 border-[#1e88e5]/60 bg-[#0a1628]/80 text-[#1e88e5] text-sm font-mono font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(30,136,229,0.3)]">
               Management
@@ -188,65 +188,11 @@ const TeamMembers = () => {
           </div>
 
           {/* Distributor */}
-          <svg
-            className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full max-w-4xl h-24 pointer-events-none"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <filter id="blueprintGlow2">
-                <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            <line
-              x1="50"
-              y1="0"
-              x2="50"
-              y2="30"
-              stroke="#1e88e5"
-              strokeWidth="2"
-              strokeDasharray="6 4"
-              filter="url(#blueprintGlow2)"
-            />
-
-            <line
-              x1="10"
-              y1="30"
-              x2="90"
-              y2="30"
-              stroke="#1e88e5"
-              strokeWidth="2"
-              strokeDasharray="6 4"
-              filter="url(#blueprintGlow2)"
-            />
-
-            {[10, 30, 50, 70, 90].map((x) => (
-              <g key={x}>
-                <line
-                  x1={x}
-                  y1="30"
-                  x2={x}
-                  y2="60"
-                  stroke="#1e88e5"
-                  strokeWidth="2"
-                  strokeDasharray="6 4"
-                  filter="url(#blueprintGlow2)"
-                />
-                <circle cx={x} cy="30" r="2" fill="#1e88e5" />
-                <circle cx={x} cy="60" r="2" fill="#1e88e5" />
-              </g>
-            ))}
-            
-            {/* Connection point markers */}
-            <circle cx="50" cy="0" r="2" fill="#1e88e5" />
-            <circle cx="10" cy="30" r="2" fill="#1e88e5" />
-            <circle cx="90" cy="30" r="2" fill="#1e88e5" />
-          </svg>
+           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[2px] h-12 bg-[#1e88e5] shadow-[0_0_8px_rgba(30,136,229,0.8)]">
+            {/* Measurement markers */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#1e88e5] shadow-[0_0_8px_rgba(30,136,229,0.8)]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#1e88e5] shadow-[0_0_8px_rgba(30,136,229,0.8)]" />
+          </div>
         </div>
 
         {/* Core Team */}
@@ -272,5 +218,5 @@ const TeamMembers = () => {
     </div>
   );
 };
+export default SectionWrapper(TeamMembers, "teamMembers", "z-50");
 
-export default TeamMembers;

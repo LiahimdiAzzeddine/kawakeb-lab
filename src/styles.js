@@ -10,6 +10,8 @@ const styles = {
 
   sectionHeadText:
     "Microgram  text-[#65a3aa] tracking-wider font-black md:text-[50px] sm:text-[40px] xs:text-[30px] text-[20px]",
+     sectionHeadText2:
+    "Microgram  text-[#1e88e5] tracking-wider font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[20px]",
   sectionSubText:
     "Microgram sm:text-[18px] text-[14px] text-[#65a3aa] uppercase tracking-wider",
 };

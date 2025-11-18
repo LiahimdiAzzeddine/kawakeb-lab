@@ -23,37 +23,28 @@ function App() {
 
       <div className="">
         {/* Canvas plein écran en fond */}
-        {/* <BackgroundCanvas /> */}
+        <BackgroundCanvas />
 
         <div id="scroll-sections"
-        ><Navbar />
+        >
+          <Navbar />
           <Video />
-          <Hero />
+           <div  id="section-1" >
+          <Hero /> 
+          <About /></div>
+          <div className="blueprint h-full" id="section-2" >
+          <TeamMembers/>
+          </div>
+          <Projects />
+         
           
-          <About />
-         <Projects/>
-         <HypercasualGames/>
-
-          <section style={{ height: "100vh" }} >Section 2 </section>
-          <section style={{ height: "100vh" }}>Section 3 </section>
-          <section id="section-4"  style={{ height: "100vh" }}>
-            	
-	<div className="blueprint h-full" >
-		
-    </div>
-             </section>
-          <section style={{ height: "100vh" }}>Section 5 </section>
-          <section style={{ height: "100vh" }}>Section 6</section>
-           </div>
-           <section style={{ height: "100vh" }} id="section-7" >Section 7</section>
-            <section style={{ height: "100vh" }} id="section-8" >Section 8</section>
-       
-<Contact/>
-        <Footer />
-        <ScrollToTopButton />
-
-
-
+          
+          <HypercasualGames /> 
+        </div>
+ <div  id="section-3" >
+        <Contact /> 
+         <Footer /></div>
+        <ScrollToTopButton /> 
       </div>
 
       <ToastContainer theme="dark" />

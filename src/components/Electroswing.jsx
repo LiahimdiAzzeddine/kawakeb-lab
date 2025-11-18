@@ -35,25 +35,30 @@ export const Electroswing = forwardRef(
       float.loop = THREE.LoopRepeat;
 
       ScrollTrigger.create({
-        trigger: "#section-7",
+        trigger: "#section-3",
         start: "top bottom",
         end: "center top",
         markers: true,
 
         // 🔥 Le scroll avance Jump
-        onUpdate: (self) => {
-          const p = self.progress;
+        // onUpdate: (self) => {
+        //   const p = self.progress;
 
-          // Mouvement de l'astronaute
-          AstronautRef.current.position.y = -600 * p;
+        //   // Mouvement de l'astronaute
+        //   AstronautRef.current.position.y = -600 * p;
 
-          // Scrub Jump tant qu'on n'est pas à la fin
-          if (p < 1) {
-            const duration = jump.getClip().duration;
-            jump.time = duration * p;
-          }
+        //   // Scrub Jump tant qu'on n'est pas à la fin
+        //   if (p < 1) {
+        //     const duration = jump.getClip().duration;
+        //     jump.time = duration * p;
+        //   }
+        // },
+        onEnter: () => {
+          AstronautRef.current.position.y = AstronautRef.current.position.y + -300;
+          float.stop();
+          float.paused = true;
+          jump.play()
         },
-
         // 🔥 Quand on QUITTE la section → Float démarre
         onLeave: () => {
           jump.paused = true; // on fige Jump
@@ -83,7 +88,7 @@ export const Electroswing = forwardRef(
       wireframe: true,
     });
     return (
-      
+
       <group
         ref={ref}
         {...props}

@@ -63,7 +63,7 @@ const Navbar = () => {
             onClick={() => setMenuOpen(!menuOpen)}
           />
           <div
-            className={`${menuOpen ? "flex" : "hidden"} p-6 absolute top-16 right-0 mx-4 my-2 min-w-[140px] z-10`}
+            className={`${menuOpen ? "flex" : "hidden"} p-6 absolute top-12 right-0 my-2 min-w-[140px] z-50`}
             style={{ background: "linear-gradient(to right, rgba(46, 40, 49, 0.8), rgba(26, 57, 60, 0.9))" }}
           >
             <ul className="list-none flex flex-col gap-4">

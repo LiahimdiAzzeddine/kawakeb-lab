@@ -4,7 +4,6 @@ import { SectionWrapper } from "../hoc";
 import { fadeIn, slideInFromLeft, textVariant } from "../utils/motion";
 import { Brain, Code, Glasses, Gamepad2, Zap, X } from "lucide-react";
 import { useState } from "react";
-import TeamMembers from "./TeamMembers";
 
 export const IconVR = (props) => (
   <svg
@@ -255,7 +254,6 @@ const About = () => {
           </motion.div>
         </motion.div>
       )}
-      <TeamMembers />
     </div>
   );
 };
