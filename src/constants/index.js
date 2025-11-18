@@ -98,6 +98,12 @@ export const teamStructure = {
       gradient: "from-teal-400 via-cyan-500 to-teal-600",
       icon: Box
     },
+    { 
+      name: "bakali Ayoub", 
+      role: "Game Designer",
+      gradient: "from-teal-400 via-cyan-500 to-teal-600",
+      icon: Box
+    },
   ]
 };
 

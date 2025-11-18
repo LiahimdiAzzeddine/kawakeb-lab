@@ -1,20 +1,10 @@
 import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { Environment, Lightformer, OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../sub-components/Loader";
 
-const Earth = () => {
-  const { scene } = useGLTF("./planet/scene.gltf");
-
-  // Memoize the loaded GLTF model
-  const memoizedScene = useMemo(() => scene, [scene]);
-
-  return (
-    <primitive object={memoizedScene} scale={2.5} position-y={0} rotation-y={0} />
-  );
-};
-
+import Astronaut from "../Astronaut"
 const EarthCanvas = () => {
   return (
     <Canvas
@@ -36,9 +26,17 @@ const EarthCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Earth />
+       <Astronaut/>
         <Preload all />
       </Suspense>
+       <Environment files="./blue_photo_studio_1k.hdr" resolution={512} >
+                <group rotation={[0, 0, 1]}>
+                  <Lightformer form="circle" intensity={10} position={[0, 10, -10]} scale={20} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[0, 1, 0]} scale={[10, 100, 1]} />
+                </group>
+              </Environment>
     </Canvas>
   );
 };

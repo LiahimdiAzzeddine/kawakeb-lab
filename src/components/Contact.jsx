@@ -5,8 +5,9 @@ import { Mail, User, MessageSquare, Send } from "lucide-react";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
+import { fadeIn, slideIn, textVariant } from "../utils/motion";
 import { toast } from "react-toastify";
+import { EarthCanvas } from "./canvas";
 
 const Contact = () => {
   const formRef = useRef();
@@ -198,17 +199,8 @@ const Contact = () => {
             <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-gradient-to-br from-cyan-400 to-blue-600 opacity-20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-700 max-w-none pointer-events-none" />
 
             {/* 3D Model Container */}
-            <div className="relative h-full flex items-center justify-center p-6 sm:p-8 max-w-full overflow-hidden">
-              <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center">
-                  <MessageSquare className="w-16 h-16 text-white" strokeWidth={2} />
-                </div>
-             
-              </div>
-            </div>
 
-            {/* Bottom gradient line */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-600 rounded-full" />
+        <EarthCanvas />
           </div>
         </motion.div>
       </div>

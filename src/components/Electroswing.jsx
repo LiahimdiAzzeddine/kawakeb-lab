@@ -14,68 +14,7 @@ export const Electroswing = forwardRef(
     //     actions["Seat"].play();
     //   }
     // }, [actions]);
-    useEffect(() => {
-      if (!AstronautRef.current || !actions) return;
-
-      const jump = actions["Jump"];
-      const float = actions["Float-Legacy Slot"];
-
-      if (!jump || !float) {
-        console.warn("Animations manquantes !");
-        return;
-      }
-
-      // Setup Jump (scrub)
-      jump.reset().play();
-      jump.paused = true;
-
-      // Setup Float
-      float.reset();
-      float.paused = true;
-      float.loop = THREE.LoopRepeat;
-
-      ScrollTrigger.create({
-        trigger: "#section-3",
-        start: "top bottom",
-        end: "center top",
-        markers: true,
-
-        // 🔥 Le scroll avance Jump
-        // onUpdate: (self) => {
-        //   const p = self.progress;
-
-        //   // Mouvement de l'astronaute
-        //   AstronautRef.current.position.y = -600 * p;
-
-        //   // Scrub Jump tant qu'on n'est pas à la fin
-        //   if (p < 1) {
-        //     const duration = jump.getClip().duration;
-        //     jump.time = duration * p;
-        //   }
-        // },
-        onEnter: () => {
-          AstronautRef.current.position.y = AstronautRef.current.position.y + -300;
-          float.stop();
-          float.paused = true;
-          jump.play()
-        },
-        // 🔥 Quand on QUITTE la section → Float démarre
-        onLeave: () => {
-          jump.paused = true; // on fige Jump
-          float.reset().play();
-          float.paused = false;
-        },
-
-        // 🔥 Quand on revient en arrière → Float s’arrête, Jump reprend
-        onEnterBack: () => {
-          float.stop();
-          float.paused = true;
-          jump.paused = true; // Jump est en scrub, donc toujours "paused"
-        },
-      });
-
-      return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-    }, [actions]);
+  
 
     if (materials["Material.001"]) {
       materials["Material.001"].transparent = true;

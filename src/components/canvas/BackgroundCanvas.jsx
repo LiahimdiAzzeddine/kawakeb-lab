@@ -1,19 +1,19 @@
 // src/components/BackgroundCanvas.jsx
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls, Sky, Stars, Trail } from "@react-three/drei";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 import AtmosphereMesh from "../AtmosphereMesh";
 import EarthMaterial from "../EarthMaterial";
 import { Spaceship } from "../Spaceship";
-import { Astronaut } from "../Astronaut";
-import { Electroswing } from "../Electroswing";
 import {
   CubeTextureLoader,
 } from "three";
 import QonoSMaterial from "./QonoSMaterial";
+import CanvasLoader from "../sub-components/Loader";
+import { Electroswing } from "../Electroswing";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,15 +121,12 @@ function CameraScrollAnimation({ earthRef, shipRefo, setWireframe, astronaut }) 
     tl.to(shipRefo.current.position, { x: 0, duration: 0.7, ease: "power1.inOut" })
     tl.to(shipRefo.current.position, { z: 2.2, duration: 0.7, ease: "power1.inOut" }, '<0.1')
     tl.to(shipRefo.current.rotation, { y: 0, x: Math.PI / 2, duration: 0.7, ease: "power1.inOut" }, '<0.1');
+    tl.to(camera, { fov: 80, duration: 1.5, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+tl.to(shipRefo.current.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<0.2');
+    tl.to(camera.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<0.1');
 
-    tl.to(camera, { fov: 75, duration: 1.5, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
-
-
-    tl.to(shipRefo.current.position, { y: -2, duration: 0.8, ease: "power1.inOut" }, '<');
-    tl.to(camera.position, { y: -2, duration: 0.8, ease: "power1.inOut" }, '<');
-
-    tl.to(camera.position, { y: -10, duration: 5, ease: "power1.inOut" });
-    tl.to(shipRefo.current.position, { y: -9, duration: 5, ease: "power1.inOut" }, '<');
+    tl.to(camera.position, { y: -10, duration: 4, ease: "power1.inOut" });
+    tl.to(shipRefo.current.position, { y: -9, duration: 4, ease: "power1.inOut" }, '<');
     // //apartir d ici le movement est n'est pas naturell il faut faire une solution
     //
     tl.to(shipRefo.current.rotation, { y: Math.PI / 6, duration: 0.5, ease: "power1.inOut" }, '<');
@@ -137,9 +134,9 @@ function CameraScrollAnimation({ earthRef, shipRefo, setWireframe, astronaut }) 
     tl.to(shipRefo.current.rotation, { y: 0, duration: 0.2, ease: "power1.inOut" }, '<0.5');
     tl.to(shipRefo.current.position, { x: -2, duration: 1, ease: "power1.inOut" });
     tl.to(shipRefo.current.rotation, { x: Math.PI / 12, y: -Math.PI / 2, duration: 0.5, ease: "power1.inOut" }, '<');
-    tl.to(shipRefo.current.position, { x: 0.5, y: -10, duration: 1, ease: "power1.inOut" });
+    tl.to(shipRefo.current.position, { x:1.2, y: -11, duration: 1, ease: "power1.inOut" });
     tl.to(shipRefo.current.rotation, { x: Math.PI / 2, y: Math.PI / 2, z: -Math.PI / 2, duration: 1, ease: "power1.inOut" }, '<');
-    tl.to(camera, { fov: 40, duration: 0.7, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+    tl.to(camera, { fov: 50, duration: 0.7, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
     //
     //tl.to(shipRefo.current.rotation, { y: -Math.PI / 2, x: 0, duration: 2, ease: "power1.inOut" });
     // tl.to(shipRefo.current.position, { x: 0, duration: 1, ease: "power1.inOut" }, '<');
@@ -226,24 +223,28 @@ export default function BackgroundCanvas() {
         <directionalLight position={[x, y, z]} />
 
         <Stars radius={300} depth={60} count={8000} factor={6} fade />
-        <Earth refEarth={EarthRef} />
-
-        <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe} />
-
+        <Suspense fallback={<CanvasLoader />}>
+          <Earth refEarth={EarthRef} />
+        </Suspense>
+   
+          <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe} />
+     
         {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
         {/* <Astronaut/> */}
-        <Qono position={[-14, 3, -25]} planetRef={NeptuneRef} />
-        <Planet
-          texturePath="./textures/c0bf2c169a377e96ee80b25245188c65.jpg"
-          size={1.8}
-          position={[35, -5, -70]}
-          rotationSpeed={0.003}
-          planetRef={JupiterRef}
-        />
+        <Suspense fallback={<CanvasLoader />}>
+          <Qono position={[-14, 3, -25]} planetRef={NeptuneRef} /></Suspense>
+        <Suspense fallback={<CanvasLoader />}>
+          <Planet
+            texturePath="./textures/c0bf2c169a377e96ee80b25245188c65.jpg"
+            size={1.8}
+            position={[35, -5, -70]}
+            rotationSpeed={0.003}
+            planetRef={JupiterRef}
+          />
+        </Suspense>
 
 
-
-        <Satellite earthRef={EarthRef} />
+        {/* <Satellite earthRef={EarthRef} /> */}
 
         <CameraScrollAnimation
           earthRef={EarthRef}
