@@ -155,11 +155,12 @@ const Contact = () => {
                   </div>
                 </div>
 
+
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-gray-500 disabled:to-gray-600 transition-all duration-300 text-white font-semibold text-lg group/btn MicrogramBold shadow-lg shadow-cyan-500/25"
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-[#00a8b5] to-[#007a7e] hover:from-cyan-600 hover:to-blue-700 disabled:from-gray-500 disabled:to-gray-600 transition-all duration-300 text-white font-semibold text-lg group/btn MicrogramBold shadow-lg shadow-cyan-500/25"
                 >
                   {loading ? (
                     <>
@@ -169,7 +170,7 @@ const Contact = () => {
                   ) : (
                     <>
                       <Send className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                      <span>Send Message</span>
+                      <span>Send Message </span>
                     </>
                   )}
                 </button>

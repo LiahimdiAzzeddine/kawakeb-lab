@@ -46,21 +46,21 @@ const services = [
       "Smart NPC Behavior",
     ],
   },
-  {
-    title: "Custom Software & Web3",
-    description:
-      "Tailored software solutions with blockchain integration, enabling secure, scalable, and decentralized digital ecosystems.",
-    icon: Code,
-    gradient: "from-blue-500 to-cyan-500",
-    details:
-      "We build custom software architectures with Web3 capabilities, including smart contracts, NFT integration, and decentralized applications that revolutionize digital ownership and player economies.",
-    features: [
-      "Smart Contract Development",
-      "NFT Integration",
-      "DApp Creation",
-      "Blockchain Solutions",
-    ],
-  },
+  // {
+  //   title: "Custom Software & Web3",
+  //   description:
+  //     "Tailored software solutions with blockchain integration, enabling secure, scalable, and decentralized digital ecosystems.",
+  //   icon: Code,
+  //   gradient: "from-blue-500 to-cyan-500",
+  //   details:
+  //     "We build custom software architectures with Web3 capabilities, including smart contracts, NFT integration, and decentralized applications that revolutionize digital ownership and player economies.",
+  //   features: [
+  //     "Smart Contract Development",
+  //     "NFT Integration",
+  //     "DApp Creation",
+  //     "Blockchain Solutions",
+  //   ],
+  // },
   {
     title: "AR & VR Experiences",
     description:

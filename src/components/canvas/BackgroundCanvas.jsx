@@ -102,86 +102,6 @@ function Qono({ planetRef, position }) {
     </group>
   );
 }
-
-
-function CameraScrollAnimation({ earthRef, shipRefo, setWireframe, astronaut }) {
-  const { camera } = useThree();
-
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#scroll-sections",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 2,
-        pin: false,
-      },
-    });
-
-    tl.to(shipRefo.current.position, { x: 0, duration: 0.7, ease: "power1.inOut" })
-    tl.to(shipRefo.current.position, { z: 2.2, duration: 0.7, ease: "power1.inOut" }, '<0.1')
-    tl.to(shipRefo.current.rotation, { y: 0, x: Math.PI / 2, duration: 0.7, ease: "power1.inOut" }, '<0.1');
-    tl.to(camera, { fov: 80, duration: 1.5, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
-tl.to(shipRefo.current.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<0.2');
-    tl.to(camera.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<0.1');
-
-    tl.to(camera.position, { y: -10, duration: 4, ease: "power1.inOut" });
-    tl.to(shipRefo.current.position, { y: -9, duration: 4, ease: "power1.inOut" }, '<');
-    // //apartir d ici le movement est n'est pas naturell il faut faire une solution
-    //
-    tl.to(shipRefo.current.rotation, { y: Math.PI / 6, duration: 0.5, ease: "power1.inOut" }, '<');
-    tl.to(shipRefo.current.position, { x: 2, duration: 0.5, ease: "power1.inOut" }, '<');
-    tl.to(shipRefo.current.rotation, { y: 0, duration: 0.2, ease: "power1.inOut" }, '<0.5');
-    tl.to(shipRefo.current.position, { x: -2, duration: 1, ease: "power1.inOut" });
-    tl.to(shipRefo.current.rotation, { x: Math.PI / 12, y: -Math.PI / 2, duration: 0.5, ease: "power1.inOut" }, '<');
-    tl.to(shipRefo.current.position, { x:1.1, y: -11, duration: 1, ease: "power1.inOut" });
-    tl.to(shipRefo.current.rotation, { x: Math.PI / 2, y: Math.PI / 2, z: -Math.PI / 2, duration:2, ease: "power1.inOut" }, '<');
-    tl.to(camera, { fov: 50, duration: 2, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
-    tl.to(shipRefo.current.position, { x:4, duration: 1, ease: "power1.inOut" });
-    //
-    //tl.to(shipRefo.current.rotation, { y: -Math.PI / 2, x: 0, duration: 2, ease: "power1.inOut" });
-    // tl.to(shipRefo.current.position, { x: 0, duration: 1, ease: "power1.inOut" }, '<');
-    //  tl.to(shipRefo.current.rotation, { y: Math.PI / 2, duration: 2, ease: "power1.inOut" });
-
-
-    ScrollTrigger.create({
-      trigger: "#section-2",
-      start: "top center",
-      end: "bottom center",
-      onEnter: () => setWireframe(true),
-      onLeaveBack: () => setWireframe(false),
-      onLeave: () => setWireframe(false),
-      onEnterBack: () => setWireframe(true),
-    });
-    //   ScrollTrigger.create({
-    //     trigger: "#section-7",
-    //     start: "top bottom",
-    //     end: "center top",
-    //     markers:true,
-    //  onUpdate: (self) => {
-    // 		console.log(
-    // 			'progress:',
-    // 			self.progress.toFixed(3),
-    // 			'direction:',
-    // 			self.direction,
-    // 			'velocity',
-    // 			self.getVelocity()
-    // 		);
-    //     astronaut.current.position.y=-600*Number(self.progress)
-    // 	}
-    //   });
-
-
-
-
-
-
-    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  }, [camera]);
-
-  return null;
-}
-
 function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
   const ref = planetRef || useRef();
   const map = useLoader(THREE.TextureLoader, texturePath);
@@ -196,6 +116,125 @@ function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0
     </mesh>
   );
 }
+
+
+function CameraScrollAnimation({ earthRef, shipRefo, setWireframe, astronaut }) { 
+ 
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#scroll-sections",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 2,
+        pin: false,
+      },
+    });
+
+    // -------------------------------------------------------
+    // 🔒 1) TES 8 PREMIÈRES ANIMATIONS — INCHANGÉES
+    // -------------------------------------------------------
+    tl.to(shipRefo?.current?.position, { x: 0, duration: 0.7, ease: "power1.inOut" })
+    tl.to(shipRefo?.current?.position, { z: 2.2, duration: 0.7, ease: "power1.inOut" }, '<0.1')
+    tl.to(shipRefo?.current?.rotation, { y: 0, x: Math.PI / 2, duration: 0.7, ease: "power1.inOut" }, '<0.1');
+    tl.to(camera, { fov:65, duration: 1.5, ease: "power1.inOut", onUpdate: () => camera.updateProjectionMatrix() }, "<");
+
+    tl.to(shipRefo?.current?.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<0.2');
+    tl.to(camera.position, { y: -7.5, duration: 0.8, ease: "power1.inOut" }, '<');
+
+    tl.to(camera.position, { y: -10, duration: 4, ease: "power1.inOut" });
+    tl.to(shipRefo?.current?.position, { y: -10, duration: 4, ease: "power1.inOut" }, '<');
+
+    // -------------------------------------------------------
+    // ✨ 2) NOUVELLE VERSION FLUIDE & LOGIQUE — améliorée
+    // -------------------------------------------------------
+
+    // Virage doux
+    tl.to(shipRefo?.current?.rotation, { 
+      y: Math.PI / 10, 
+      z:Math.PI/6,
+      duration: 0.7, 
+      ease: "power2.inOut" 
+    }, '<');
+
+    tl.to(shipRefo?.current?.position, { 
+      x: 1.8, 
+      duration: 0.7, 
+      ease: "power2.inOut" 
+    }, '<0.1');
+     tl.to(shipRefo?.current?.rotation, { 
+      z: -Math.PI/3, 
+      duration: 0.7, 
+      ease: "power2.inOut" 
+    }, '<1');
+    // Retour smooth
+    tl.to(shipRefo?.current?.rotation, { 
+      z: Math.PI/3, 
+      y: -Math.PI / 4, 
+      duration:2, 
+      ease: "power2.inOut" 
+    },'<0.7');
+    tl.to(shipRefo?.current?.position, { 
+      x: -1.8, 
+      duration: 1, 
+      ease: "power2.inOut" 
+    });
+
+
+    
+    // Rotation cinématique + descente finale
+    tl.to(shipRefo?.current?.rotation, {
+      x: Math.PI / 4,
+      y: Math.PI / 2,
+      z: -Math.PI / 6,
+      duration: 2,
+      ease: "power2.inOut",
+    });
+
+    tl.to(shipRefo?.current?.position, { 
+      x: 0.5, 
+      y: -11, 
+      duration: 2, 
+      ease: "power2.inOut" 
+    }, '<0.51');
+
+    // Zoom cinématique cam
+    tl.to(camera, { 
+      fov: 50, 
+      duration: 1.8, 
+      ease: "power2.inOut", 
+      onUpdate: () => camera.updateProjectionMatrix(),
+    }, '<');
+
+    // Petit slide final du ship
+    tl.to(shipRefo?.current?.position, { 
+      x: 4, 
+      duration: 3, 
+      ease: "power2.inOut" 
+    });
+
+    // -------------------------------------------------------
+    // Wireframe trigger
+    // -------------------------------------------------------
+    ScrollTrigger.create({
+      trigger: "#section-2",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => setWireframe(true),
+      onLeaveBack: () => setWireframe(false),
+      onLeave: () => setWireframe(false),
+      onEnterBack: () => setWireframe(true),
+    });
+
+    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  }, [shipRefo.current,camera]);
+
+  return null;
+}
+
+
 
 export default function BackgroundCanvas() {
   const { x, y, z } = sunDirection;
@@ -227,9 +266,9 @@ export default function BackgroundCanvas() {
         <Suspense fallback={<CanvasLoader />}>
           <Earth refEarth={EarthRef} />
         </Suspense>
-   
+    <Suspense fallback={<CanvasLoader />}>
           <Electroswing ref={shipRefo} AstronautRef={AstronautRef} wireframe={wireframe} />
-     
+     </Suspense>
         {/* <Spaceship ref={shipRefo} wireframe={wireframe}/> */}
         {/* <Astronaut/> */}
         <Suspense fallback={<CanvasLoader />}>
@@ -243,16 +282,16 @@ export default function BackgroundCanvas() {
             planetRef={JupiterRef}
           />
         </Suspense>
-
-
-        {/* <Satellite earthRef={EarthRef} /> */}
-
-        <CameraScrollAnimation
+ <CameraScrollAnimation
           earthRef={EarthRef}
           shipRefo={shipRefo}
           setWireframe={setWireframe}
           astronaut={AstronautRef}
         />
+
+        {/* <Satellite earthRef={EarthRef} /> */}
+
+       
 
 
         {/* <OrbitControls/> */}

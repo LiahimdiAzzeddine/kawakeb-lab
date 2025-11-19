@@ -23,6 +23,67 @@ import {
   foodhealogo
 } from "../assets";
 import { Users, Code, Palette, Gamepad2, Lightbulb, Box } from "lucide-react";
+const projects = [
+  {
+    title: "CRANE SIMULATOR",
+    category: "VR Training & Serious Games",
+    description:
+      "Our VR cargo-handling simulator, designed for port workers, showcases our expertise in serious games and virtual reality.",
+    details:
+      "This project replicates real-world unloading operations using hand controllers and immersive VR, providing a safe and effective training environment.",
+    impact:
+      "It highlights our ability to blend realism with interactive technology, demonstrating that our studio is equipped to develop high-impact simulations for professional training, education.",
+    gradient: "from-cyan-400 to-blue-500",
+    accentColor: "cyan",
+    imageAlt: "VR Crane Simulator - Port Worker Training",
+    videoUrl: "/00formation Grue à conteneurs de port copy.mp4",
+    images: [],
+  },
+  {
+    title: "UEFN CREATIVE",
+    subtitle: "TAPPING THE POWER OF UNREAL EDITOR FOR FORTNITE",
+    category: "Unreal Editor for Fortnite",
+    description:
+      "We developed multiple custom game maps, each delivering a fresh and immersive experience for players. Leveraging Fortnite's engine, we crafted unique environments with tailored mechanics.",
+    details:
+      "offering new challenges and gameplay possibilities beyond the base game.",
+    impact:
+      "This project highlights our ability to innovate within established platforms, blending creativity with technical expertise to build engaging, high-quality gaming experiences within the Fortnite ecosystem.",
+    gradient: "from-purple-400 to-pink-500",
+    accentColor: "purple",
+    imageAlt: "UEFN Creative Map - Fortnite",
+    videoUrl: null,
+    images: [
+      { url: "/Screen Shot 2025-05-13 at 23.11.05.png", size: "large" },
+      { url: "/landscape_comp-1508.jpg", size: "small" },
+      { url: "/Screen Shot 2025-05-13 at 23.14.11.png", size: "small" },
+      { url: "/Screen Shot 2025-05-13 at 23.14.47.png", size: "medium" },
+      { url: "/2812-3213-0254.jpg", size: "medium" },
+    ],
+  },
+  {
+    title: "SNOWCREST PEAK",
+    subtitle: "WEB3 GAMING PROJECT",
+    category: "Web3 Gaming",
+    description:
+      "Embracing the future of decentralized gaming, we developed Snowcrest Peak, a Web3 anime-inspired game that combines farming simulation with high-stakes ski racing.",
+    details:
+      "Players immerse themselves in revitalizing a once-thriving ski resort, engaging in activities like crop cultivation and interacting with a vibrant community of characters.",
+    impact:
+      "This project underscores our proficiency in integrating blockchain technology with engaging gameplay, creating immersive experiences that resonate with modern gamers.",
+    gradient: "from-emerald-400 to-teal-500",
+    accentColor: "emerald",
+    imageAlt: "Snowcrest Peak - Web3 Game",
+    videoUrl: null,
+    images: [
+      { url: "/snow1.png", size: "medium" },
+      { url: "/snow5.jpg", size: "medium" },
+      { url: "/snow2.png", size: "large" },
+      { url: "/snow3.png", size: "small" },
+      { url: "/snow4.jpg", size: "small" },
+    ],
+  },
+];
 
 export const teamStructure = {
   founders: [
@@ -114,8 +175,8 @@ export const navLinks = [
     url:"",
   },
   {
-    id: "services",
-    title: "Service",
+    id: "projects",
+    title: "Projects",
     url:"",
   },
   {
@@ -309,7 +370,7 @@ const serviceCard = [
   },
 ];
 /**/
-const projects = [
+const projectsold = [
   {
     name: "FoodHea",
     description:

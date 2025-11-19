@@ -22,7 +22,7 @@ const Hero = () => {
       className={`${styles.padding} ms:max-w-[90%] custom-max-w mx-auto relative `}
     >
  
-      <section id="hero" style={{ height: "100vh" }} className=" h-full w-full mx-auto flex flex-col items-center justify-center pt-8 sm:pt-0 overflow-hidden ">
+      <section id="hero" style={{ height: "100vh" }} className=" h-full w-full mx-auto flex flex-col items-center justify-center  overflow-hidden ">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -33,12 +33,12 @@ const Hero = () => {
 
             <motion.div
               variants={slideInFromLeft(0.5)}
-              className="Microgram flex flex-col gap-6 mt-16 sm:mt-0 text-5xl sm:text-5xl font-bold text-white max-w-[600px] z-50"
+              className="Microgram flex flex-col gap-6 text-4xl sm:text-5xl font-bold text-white max-w-[600px] z-50"
             >
               <span>
                 {title}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e8e8e8] to-[#00a8b5]">
-                  {companyName}{" "}
+                  {" "}{companyName}{" "}
                 </span>
               </span>
             </motion.div>
@@ -58,7 +58,7 @@ const Hero = () => {
               variants={slideInFromLeft(animationDuration)}
               className="  text-[#e8e8e8] max-w-3xl z-50"
             >
-              <div className="group relative bg-gradient-to-br text-base leading-[30px] z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 py-1 px-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
+              <div className="group relative bg-gradient-to-br text-base leading-[28px]  lg:leading-[30px] z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 py-1 px-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
                 <div className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-5 rounded-e-3xl`} />
 
                 {/* Decorative border accent */}

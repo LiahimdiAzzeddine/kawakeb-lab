@@ -1,146 +1,105 @@
- {/* <Planet
-          texturePath="./textures/mars-4k.jpg"
-          size={1}
-          position={[-18, 1.6, -35]}
-          rotationSpeed={0.008}
-          planetRef={MarsRef}
-        />
-        <Planet
-          texturePath="./textures/neptune.jpeg"
-          size={1.8}
-          position={[2, 24, -160]}
-          rotationSpeed={0.003}
-          planetRef={NeptuneRef}
-        />
-        <PlanetWithRings
-          planetTexture="./textures/8k_jupiter.jpg"
-          ringTexture="./textures/Rings_Tex.jpeg"
-          size={2.5}
-          ringInner={3}
-          ringOuter={5}
-          position={[80, 30, -150]}
-          rotationSpeed={0.0003}
-          groupRef={JupiterRef}
-        />
-
-        <CameraScrollAnimation
-          earthRef={EarthRef}
-          marsRef={MarsRef}
-          neptuneRef={NeptuneRef}
-          jupiterRef={JupiterRef}
-        /> */}
-        function PlanetWithRings({
-  planetTexture,
-  ringTexture,
-  size = 2,
-  ringInner = 2.5,
-  ringOuter = 4,
-  position = [0, 0, 0],
-  rotationSpeed = 0.0005,
-  groupRef,
-}) {
-  const planetRef = useRef();
-  const ringRef = useRef();
-  const axialTilt = (30.4 * Math.PI) / 180;
-
-  const planetMap = useLoader(THREE.TextureLoader, planetTexture);
-  const ringMap = useLoader(THREE.TextureLoader, ringTexture);
-
-  useFrame(() => {
-    planetRef.current.rotation.y += rotationSpeed;
-    ringRef.current.rotation.z += rotationSpeed * 0.2;
-  });
-
+import React, { useRef } from 'react'
+import { useGLTF, useAnimations } from '@react-three/drei'
+import * as THREE from "three";
+export const Electroswing = forwardRef(
+  ({ wireframe = false, AstronautRef, ...props }, ref) => {
+  const { nodes, materials, animations } = useGLTF('/electroswing-opt.glb')
+  const { actions } = useAnimations(animations, group)
+  // Lance l'animation Seat uniquement quand animations est prêt
+    // useEffect(() => {
+    //   if (actions["Seat"]) {
+    //     actions["Seat"].play();
+    //   }
+    // }, [actions]);
+        if (materials["Material.001"]) {
+          materials["Material.001"].transparent = true;
+          materials["Material.001"].opacity = 0.3; // entre 0 et 1
+          materials["Material.001"].depthWrite = false; // optionnel : donne un effet "glass"
+          materials["Material.001"].side = THREE.DoubleSide; // optionnel : visible recto/verso
+        }
+        const wireMaterial = new THREE.MeshBasicMaterial({
+          color: "#00ffff",
+          wireframe: true,
+        });
   return (
-    <group ref={groupRef} rotation-x={axialTilt} position={position}>
-      <mesh ref={planetRef}>
-        <sphereGeometry args={[size, 64, 64]} />
-        <meshStandardMaterial map={planetMap} />
-      </mesh>
-      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[ringInner, ringOuter, 128]} />
-        <meshBasicMaterial
-          map={ringMap}
-          side={THREE.DoubleSide}
-          transparent
-          opacity={0.8}
+   <group
+        ref={ref}
+        {...props}
+        dispose={null}
+        scale={0.002}
+        rotation={[0, -Math.PI / 2, 0]}
+        position={[6.5, 0.4, -2]}
+      >
+      <group>
+        <group name="Luminaris_Ingame" rotation={[-Math.PI / 2, 0, 0]} />
+        <group
+          name="core_engine_ribs004"
+          position={[7.397, 21.716, 4.389]}
+          rotation={[0, 0, -0.393]}
+          scale={0.1}
         />
-      </mesh>
+        <group
+          name="core_engine_ribs005"
+          position={[-7.397, 21.716, 4.389]}
+          rotation={[0, 0, -0.393]}
+          scale={0.1}>
+          <group name="Object_11001" position={[0.292, -9.379, 31.932]}>
+            <group
+              name="core_engine_ribs005_Luminaris_starship_material_0"
+              position={[-198.22, 199.168, -148.032]}
+              rotation={[-Math.PI / 2, -0.519, 1.181]}
+              scale={13.733}>
+              <mesh
+                name="core_engine_ribs005_Luminaris_starship_material_0_primitive0"
+                castShadow
+                receiveShadow
+                geometry={
+                  nodes.core_engine_ribs005_Luminaris_starship_material_0_primitive0.geometry
+                }
+                material={wireframe ? wireMaterial :materials.Luminaris_starship_material}
+              />
+              <mesh
+                name="core_engine_ribs005_Luminaris_starship_material_0_primitive1"
+                castShadow
+                receiveShadow
+                geometry={
+                  nodes.core_engine_ribs005_Luminaris_starship_material_0_primitive1.geometry
+                }
+                material={wireframe ? wireMaterial :materials['Material.001']}
+              />
+            </group>
+          </group>
+        </group>
+        <group name="core_engine_ribs003" rotation={[0, 0, -0.073]} />
+        <group name="Core_engine" rotation={[0, 0, 0.11]} />
+        <group name="upper_engine" rotation={[0, 0, -0.037]} />
+        <group name="lower_Rotor" position={[0, 0, -1.53]} rotation={[0, 0, 0.037]} />
+        <group name="SK_M_MED_Astronaut_01ao">
+          <primitive object={nodes.root} />
+           {/* HELMET FIX */}
+            {/* <primitive
+  object={nodes.root_1}
+  ref={(helmet) => {
+    if (!helmet) return
+
+    helmet.traverse((child) => {
+      if (child.isMesh) {
+        // Applique wireMaterial quand wireframe = true
+        child.material = wireframe ? wireMaterial : child.material
+      }
+    })
+  }}
+/> */}
+        </group>
+        <skinnedMesh
+          name="SK_M_MED_Astronaut_01mo"
+          geometry={nodes.SK_M_MED_Astronaut_01mo.geometry}
+          material={wireframe ? wireMaterial :materials.M_MED_Astronaut}
+          skeleton={nodes.SK_M_MED_Astronaut_01mo.skeleton}
+        />
+      </group>
     </group>
-  );
-}
+  )
+});
 
-function Planet({ texturePath, size = 1, position = [0, 0, 0], rotationSpeed = 0.0005, planetRef }) {
-  const ref = planetRef || useRef();
-  const map = useLoader(THREE.TextureLoader, texturePath);
-  useFrame(() => {
-    ref.current.rotation.y += rotationSpeed;
-  });
-
-  return (
-    <mesh ref={ref} position={position}>
-      <sphereGeometry args={[size, 64, 64]} />
-      <meshStandardMaterial map={map} />
-    </mesh>
-  );
-}
-function CameraScrollAnimation({ earthRef, marsRef, neptuneRef, jupiterRef }) {
-  const { camera } = useThree();
-
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#scroll-sections",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 2,
-        pin: false,
-      },
-    });
-
-    tl.to(camera.position, { x: 0, y: 0.1, z: 5, duration: 0.5 });
-
-    tl.to(
-      camera.position,
-      { x: -4, y: 0, z: 6, duration: 1 }
-    );
-    tl.to(
-      earthRef.current.position,
-      { x: -2, y: -2.5, z: 0, duration: 1 },
-      "<"
-    );
-    tl.to(
-      marsRef.current.position,
-      { x: -4, y: 0, z: 0, duration: 1 },
-      "<"
-    );
-
-    tl.to(camera.position, { x: 4, y: -1, z: 6, duration: 1 });
-    tl.to(
-      marsRef.current.position,
-      { x: 20, y: 0, z: -10, duration: 1 },
-      "<"
-    );
-    tl.to(
-      neptuneRef.current.position,
-      { x: 5, y: -1, z: 0, duration: 1 },
-      "<"
-    );
-
-    tl.to(camera.position, { x: 0, y: 2, z: 10, duration: 1.2 });
-    tl.to(
-      neptuneRef.current.position,
-      { x: -20, y: -1, z: -10, duration: 1.2 },
-      "<"
-    );
-    tl.to(
-      jupiterRef.current.position,
-      { x: 0, y: 2, z: -5, duration: 1.2 },
-      "<"
-    );
-
-    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  }, [camera, earthRef, marsRef, neptuneRef, jupiterRef]);
-
-  return null;
-}
+useGLTF.preload('/electroswing-opt.glb')

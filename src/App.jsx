@@ -40,9 +40,9 @@ function App() {
           
           
           <HypercasualGames /> 
-        </div>
+      
  <div  id="section-3" >
-        <Contact /> 
+        <Contact />   </div>
          <Footer /></div>
         <ScrollToTopButton /> 
       </div>
