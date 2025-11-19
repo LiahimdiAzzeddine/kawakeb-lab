@@ -65,14 +65,22 @@ const HypercasualGames = () => {
                 </span>
               </span>
             </motion.div>
-      <motion.div variants={textVariant()}>
+      <motion.div variants={textVariant()}
+        initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}
+      >
         <h2 className={styles.sectionHeadText}>Hypercasual Games.</h2>
       </motion.div>
 
       <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px] mb-16"
-      >
+  variants={fadeIn("", "", 0.1, 1)}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}
+  className="mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px] mb-16"
+>
+
                 <div className="group relative bg-gradient-to-br text-base leading-[30px] z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 p-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
 <div className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-5 rounded-e-3xl`}  />
 
@@ -91,6 +99,9 @@ const HypercasualGames = () => {
         {games.map((game, index) => (
           <motion.div
             key={game.title}
+              initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}
             variants={fadeIn("up", "spring", index * 0.2, 0.75)}
             className="group relative"
           >
@@ -201,6 +212,9 @@ const HypercasualGames = () => {
       {/* Summary stats */}
       <motion.div
         variants={fadeIn("up", "spring", 0.4, 0.75)}
+          initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}
         className="mt-16 p-8 rounded-xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-white/10 backdrop-blur-sm"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
