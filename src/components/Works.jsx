@@ -81,7 +81,7 @@ const Works = () => {
       <div className="w-full flex">
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className="Microgram mt-4 text-[#eaeaea] text-[17px] max-w-3xl leading-[30px]"
+          className="Microgram mt-4 text-[#eaeaea] text-[17px] max-w-3xl "
         >
           At Kawakeb, we've had the privilege of working on diverse projects that showcase our expertise and commitment to excellence. Each experience highlighted below demonstrates our ability to navigate complex challenges, leverage cutting-edge technologies, and deliver exceptional results for our clients and partners.
         </motion.p>

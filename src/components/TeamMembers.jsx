@@ -86,7 +86,7 @@ const TeamMembers = () => {
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4   max-w-3xl leading-[30px] mb-16 "
+        className="mt-4   max-w-3xl mb-16 "
       >
               <div className="relative text-[#e3f2fd] text-[17px] Microgram bg-[#0a1628]/80 rounded-sm overflow-hidden border-2 border-[#1e88e5]/60 hover:border-[#42a5f5] transition-all duration-500 backdrop-blur-sm py-3 px-6 shadow-[0_0_15px_rgba(30,136,229,0.3)] hover:shadow-[0_0_25px_rgba(30,136,229,0.5)]">
 

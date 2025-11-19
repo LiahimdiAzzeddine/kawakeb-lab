@@ -36,7 +36,7 @@ const projects = [
     gradient: "from-cyan-400 to-blue-500",
     accentColor: "cyan",
     imageAlt: "VR Crane Simulator - Port Worker Training",
-    videoUrl: "/00formation Grue à conteneurs de port copy.mp4",
+    videoUrl: "/AbdNour.mp4",
     images: [],
   },
   {

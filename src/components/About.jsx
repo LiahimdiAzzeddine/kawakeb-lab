@@ -117,7 +117,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="Microgram mt-4 text-[#eaeaea]  max-w-3xl  relative"
       >
-        <div className="group relative bg-gradient-to-br text-base leading-[30px] z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 p-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
+        <div className="group relative bg-gradient-to-br text-base z-50 from-[#2d2d2d85]/50 to-[#0f0d2e]/50 p-6 rounded-e-xl backdrop-blur-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden Microgram">
         <div className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-5 rounded-e-3xl`}  />
 
               {/* Decorative border accent */}
